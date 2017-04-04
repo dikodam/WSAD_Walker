@@ -77,13 +77,13 @@ namespace WSAD_Walker
                         PrintScreen();
                     }
                 }
-                Tick();
+                TickShots();
                 PrintScreen();
                 timer.Restart();
             }
         }
 
-        private static void Tick()
+        private static void TickShots()
         {
             List<Schuss> invalidShots = new List<Schuss>();
             foreach (Schuss s in shots)
