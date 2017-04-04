@@ -51,8 +51,6 @@
                 case Program.Direction.RIGHT:
                     left++;
                     break;
-                default:
-                    break;
             }
         }
     }

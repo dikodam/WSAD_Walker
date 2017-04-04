@@ -7,9 +7,15 @@ namespace WSAD_Walker
 {
     class Program
     {
-        public enum Direction { UP, DOWN, LEFT, RIGHT };
+        public enum Direction
+        {
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT
+        };
 
-        static  List<Schuss> shots = new List<Schuss>();
+        static List<Schuss> shots = new List<Schuss>();
         static int left = WindowWidth / 2;
         static int top = WindowHeight / 2;
 
@@ -72,7 +78,6 @@ namespace WSAD_Walker
                                 }
                                 lastDirection = Direction.RIGHT;
                                 break;
-
                         }
                         PrintScreen();
                     }
