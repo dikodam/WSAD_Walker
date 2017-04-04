@@ -29,7 +29,7 @@ namespace WSAD_Walker
 
             while (key != ConsoleKey.Escape)
             {
-                while (timer.Elapsed.Milliseconds < 500)
+                while (timer.Elapsed.Milliseconds < 50)
                 {
                     while (KeyAvailable)
                     {
