@@ -15,16 +15,16 @@ namespace WSAD_Walker
             RIGHT
         };
 
-        static List<Schuss> shots = new List<Schuss>();
-        static int left = WindowWidth / 2;
-        static int top = WindowHeight / 2;
+        static List<Schuss> shotList = new List<Schuss>();
+        static int leftPosO = WindowWidth / 2;
+        static int topPosO = WindowHeight / 2;
 
         static void Main(string[] args)
         {
             Direction lastDirection = Direction.UP;
             Stopwatch timer = new Stopwatch();
 
-            SetCursorPosition(left, top);
+            SetCursorPosition(leftPosO, topPosO);
             CursorVisible = false;
             BackgroundColor = ConsoleColor.Black;
             ForegroundColor = ConsoleColor.Green;
@@ -44,37 +44,37 @@ namespace WSAD_Walker
                         {
                             // schuss
                             case ConsoleKey.Spacebar:
-                                shots.Add(new Schuss(left, top, lastDirection));
+                                shotList.Add(new Schuss(leftPosO, topPosO, lastDirection));
                                 break;
                             // up
                             case ConsoleKey.W:
-                                if (top > 0)
+                                if (topPosO > 0)
                                 {
-                                    top--;
+                                    topPosO--;
                                 }
                                 lastDirection = Direction.UP;
                                 break;
                             // down
                             case ConsoleKey.S:
-                                if (top < WindowHeight)
+                                if (topPosO < WindowHeight)
                                 {
-                                    top++;
+                                    topPosO++;
                                 }
                                 lastDirection = Direction.DOWN;
                                 break;
-                            // left
+                            // leftPosO
                             case ConsoleKey.A:
-                                if (left > 0)
+                                if (leftPosO > 0)
                                 {
-                                    left--;
+                                    leftPosO--;
                                 }
                                 lastDirection = Direction.LEFT;
                                 break;
                             // right
                             case ConsoleKey.D:
-                                if (left < WindowWidth - 1)
+                                if (leftPosO < WindowWidth - 1)
                                 {
-                                    left++;
+                                    leftPosO++;
                                 }
                                 lastDirection = Direction.RIGHT;
                                 break;
@@ -82,16 +82,16 @@ namespace WSAD_Walker
                         PrintScreen();
                     }
                 }
-                TickShots();
+                MoveShots();
                 PrintScreen();
                 timer.Restart();
             }
         }
 
-        private static void TickShots()
+        private static void MoveShots()
         {
             List<Schuss> invalidShots = new List<Schuss>();
-            foreach (Schuss s in shots)
+            foreach (Schuss s in shotList)
             {
                 s.Move();
                 if (InvalidPosition(s))
@@ -99,9 +99,10 @@ namespace WSAD_Walker
                     invalidShots.Add(s);
                 }
             }
+
             foreach (Schuss invalidShot in invalidShots)
             {
-                shots.Remove(invalidShot);
+                shotList.Remove(invalidShot);
             }
         }
 
@@ -113,7 +114,7 @@ namespace WSAD_Walker
         private static void PrintScreen()
         {
             Clear();
-            foreach (Schuss s in shots)
+            foreach (Schuss s in shotList)
             {
                 SetCursorPosition(s.Left, s.Top);
                 if (s.Direction == Direction.UP || s.Direction == Direction.DOWN)
@@ -125,7 +126,7 @@ namespace WSAD_Walker
                     Write("-");
                 }
             }
-            SetCursorPosition(left, top);
+            SetCursorPosition(leftPosO, topPosO);
             Write("O");
         }
     }
